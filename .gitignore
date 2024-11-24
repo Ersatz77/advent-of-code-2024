@@ -1,0 +1,11 @@
+# Build directories and user presets
+build/
+out/
+CMakeUserPresets.json
+
+# Visual Studio Code files and folders
+.vscode/
+
+# Visual Studio files and folders
+.vs/
+CMakeSettings.json
