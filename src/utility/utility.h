@@ -2,26 +2,17 @@
 #define AOC_UTILITY_UTILITY_H
 
 #include <array>
-#include <concepts>
 #include <cstdint>
 #include <string>
 #include <tuple>
-#include <type_traits>
 #include <unordered_set>
 #include <utility>
 #include <vector>
 
+#include "utility/concepts.h"
+
 namespace aoc
 {
-    template<typename T>
-    concept Integer = std::is_integral_v<T>;
-
-    template<typename T>
-    concept Float = std::is_floating_point_v<T>;
-
-    template<typename T>
-    concept Number = Integer<T> || Float<T>;
-
     template<typename T>
     inline void hash_combine(size_t& seed, const T& v)
     {
@@ -61,19 +52,7 @@ namespace aoc
 
 namespace std
 {
-    template<typename T>
-    struct hash<pair<T, T>>
-    {
-        size_t operator()(const pair<T, T>& p) const
-        {
-            size_t seed = 0;
-            aoc::hash_combine(seed, p.first);
-            aoc::hash_combine(seed, p.second);
-            return seed;
-        }
-    };
-
-    template<typename T, typename U>
+    template<aoc::Hashable T, aoc::Hashable U>
     struct hash<pair<T, U>>
     {
         size_t operator()(const pair<T, U>& p) const
@@ -85,7 +64,7 @@ namespace std
         }
     };
 
-    template<typename T>
+    template<aoc::Hashable T>
     struct hash<vector<T>>
     {
         size_t operator()(const vector<T>& v) const
@@ -100,7 +79,7 @@ namespace std
         }
     };
 
-    template<typename T>
+    template<aoc::Hashable T>
     struct hash<unordered_set<T>>
     {
         size_t operator()(const unordered_set<T>& s) const
