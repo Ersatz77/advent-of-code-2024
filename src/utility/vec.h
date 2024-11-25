@@ -11,6 +11,7 @@
 
 #include "fmt/format.h"
 
+#include "utility/concepts.h"
 #include "utility/utility.h"
 
 namespace aoc
@@ -26,167 +27,159 @@ namespace aoc
     public:
         using value_type = T;
 
+        // Returns the origin (0, 0)
+        static constexpr Vec2<T> origin()
+        {
+            return { 0, 0 };
+        }
+
         // Returns all 4 (NESW) Vec2s around this Vec2
-        std::array<Vec2<T>, 4> adjacent_cardinal() const
+        constexpr std::array<Vec2<T>, 4> adjacent_cardinal() const
         {
             std::array<Vec2<T>, 4> adjacent = {};
-            static constexpr std::array<std::array<T, 2>, 4> offsets = { {
-                {1, 0}, {-1, 0}, {0, 1}, {0, -1}
-            } };
             for (size_t i = 0; i < adjacent.size(); ++i)
             {
-                adjacent[i].x = x + offsets[i][0];
-                adjacent[i].y = y + offsets[i][1];
+                adjacent[i].x = x + Vec2<T>::adjacent_cardinal_offsets[i][0];
+                adjacent[i].y = y + Vec2<T>::adjacent_cardinal_offsets[i][1];
             }
 
             return adjacent;
         }
 
         // Returns all 8 Vec2s around this Vec2
-        std::array<Vec2<T>, 8> adjacent() const
+        constexpr std::array<Vec2<T>, 8> adjacent() const
         {
             std::array<Vec2<T>, 8> adjacent = {};
-            static constexpr std::array<std::array<T, 2>, 8> offsets = { {
-                {1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {1, -1}, {-1, 1}, {-1, -1}
-            } };
-            for (size_t i = 0; i < offsets.size(); ++i)
+            for (size_t i = 0; i < adjacent.size(); ++i)
             {
-                adjacent[i].x = x + offsets[i][0];
-                adjacent[i].y = y + offsets[i][1];
+                adjacent[i].x = x + Vec2<T>::adjacent_offsets[i][0];
+                adjacent[i].y = y + Vec2<T>::adjacent_offsets[i][1];
             }
+
             return adjacent;
         }
 
-        std::string to_string() const
-        {
-            return fmt::format("({}, {})", x, y);
-        }
-
-        std::array<T, 2> to_array() const
+        // Returns the Vec2 as a 2 element array
+        constexpr std::array<T, 2> to_array() const
         {
             return { x, y };
         }
 
-        auto operator<=>(const Vec2<T>& other) const = default;
+        constexpr auto operator<=>(const Vec2<T>& rhs) const = default;
 
-        Vec2<T>& operator+=(const Vec2<T>& other)
+        constexpr Vec2<T>& operator+=(const Vec2<T>& rhs)
         {
-            x += other.x;
-            y += other.y;
+            x += rhs.x;
+            y += rhs.y;
             return *this;
         }
 
-        Vec2<T>& operator-=(const Vec2<T>& other)
+        constexpr Vec2<T>& operator-=(const Vec2<T>& rhs)
         {
-            x -= other.x;
-            y -= other.y;
+            x -= rhs.x;
+            y -= rhs.y;
             return *this;
         }
 
-        Vec2<T>& operator*=(const Vec2<T>& other)
+        constexpr Vec2<T>& operator*=(const Vec2<T>& rhs)
         {
-            x *= other.x;
-            y *= other.y;
+            x *= rhs.x;
+            y *= rhs.y;
             return *this;
         }
 
-        Vec2<T>& operator/=(const Vec2<T>& other)
+        constexpr Vec2<T>& operator/=(const Vec2<T>& rhs)
         {
-            x /= other.x;
-            y /= other.y;
+            x /= rhs.x;
+            y /= rhs.y;
             return *this;
         }
 
-        Vec2<T>& operator+=(const T other)
+        constexpr Vec2<T>& operator+=(const T rhs)
         {
-            x += other;
-            y += other;
+            x += rhs;
+            y += rhs;
             return *this;
         }
 
-        Vec2<T>& operator-=(const T other)
+        constexpr Vec2<T>& operator-=(const T rhs)
         {
-            x -= other;
-            y -= other;
+            x -= rhs;
+            y -= rhs;
             return *this;
         }
 
-        Vec2<T>& operator*=(const T other)
+        constexpr Vec2<T>& operator*=(const T rhs)
         {
-            x *= other;
-            y *= other;
+            x *= rhs;
+            y *= rhs;
             return *this;
         }
 
-        Vec2<T>& operator/=(const T other)
+        constexpr Vec2<T>& operator/=(const T rhs)
         {
-            x /= other;
-            y /= other;
+            x /= rhs;
+            y /= rhs;
             return *this;
+        }
+
+        constexpr Vec2<T> operator+(const Vec2<T>& rhs) const
+        {
+            return Vec2<T>(*this) += rhs;
+        }
+
+        constexpr Vec2<T> operator-(const Vec2<T>& rhs) const
+        {
+            return Vec2<T>(*this) -= rhs;
+        }
+
+        constexpr Vec2<T> operator*(const Vec2<T>& rhs) const
+        {
+            return Vec2<T>(*this) *= rhs;
+        }
+
+        constexpr Vec2<T> operator/(const Vec2<T>& rhs) const
+        {
+            return Vec2<T>(*this) /= rhs;
+        }
+
+        constexpr Vec2<T> operator+(const T rhs) const
+        {
+            return Vec2<T>(*this) += rhs;
+        }
+
+        constexpr Vec2<T> operator-(const T rhs) const
+        {
+            return Vec2<T>(*this) -= rhs;
+        }
+
+        constexpr Vec2<T> operator*(const T rhs) const
+        {
+            return Vec2<T>(*this) *= rhs;
+        }
+
+        constexpr Vec2<T> operator/(const T rhs) const
+        {
+            return Vec2<T>(*this) /= rhs;
         }
 
         T x = 0;
         T y = 0;
 
-        static const Vec2<T> origin;
+    private:
+        static constexpr std::array<std::array<T, 2>, 4> adjacent_cardinal_offsets = { {
+            {1, 0}, {-1, 0}, {0, 1}, {0, -1}
+        } };
+        static constexpr std::array<std::array<T, 2>, 8> adjacent_offsets = { {
+            {1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {1, -1}, {-1, 1}, {-1, -1}
+        } };
     };
-
-    template<Number T>
-    Vec2<T> operator+(Vec2<T> lhs, const Vec2<T>& rhs)
-    {
-        return lhs += rhs;
-    }
-
-    template<Number T>
-    Vec2<T> operator-(Vec2<T> lhs, const Vec2<T>& rhs)
-    {
-        return lhs -= rhs;
-    }
-
-    template<Number T>
-    Vec2<T> operator*(Vec2<T> lhs, const Vec2<T>& rhs)
-    {
-        return lhs *= rhs;
-    }
-
-    template<Number T>
-    Vec2<T> operator/(Vec2<T> lhs, const Vec2<T>& rhs)
-    {
-        return lhs /= rhs;
-    }
-
-    template<Number T>
-    Vec2<T> operator+(Vec2<T> lhs, const T rhs)
-    {
-        return lhs += rhs;
-    }
-
-    template<Number T>
-    Vec2<T> operator-(Vec2<T> lhs, const T rhs)
-    {
-        return lhs -= rhs;
-    }
-
-    template<Number T>
-    Vec2<T> operator*(Vec2<T> lhs, const T rhs)
-    {
-        return lhs *= rhs;
-    }
-
-    template<Number T>
-    Vec2<T> operator/(Vec2<T> lhs, const T rhs)
-    {
-        return lhs /= rhs;
-    }
 
     template<Number T>
     std::ostream& operator<<(std::ostream& os, const Vec2<T>& vec)
     {
-        return os << vec.to_string();
+        return os << fmt::format("({}, {})", vec.x, vec.y);
     }
-
-    template<Number T>
-    const Vec2<T> Vec2<T>::origin = { 0, 0 };
 
     // --------------------------------------------------------------------------------
     // Vector 3
@@ -199,178 +192,171 @@ namespace aoc
     public:
         using value_type = T;
 
+        // Returns the origin (0, 0, 0)
+        static constexpr Vec2<T> origin()
+        {
+            return { 0, 0, 0 };
+        }
+
         // Returns all 6 (NESWUD) Vec3s around this Vec3
-        std::array<Vec3<T>, 6> adjacent_cardinal() const
+        constexpr std::array<Vec3<T>, 6> adjacent_cardinal() const
         {
             std::array<Vec3<T>, 6> adjacent = {};
-            static constexpr std::array<std::array<T, 3>, 6> offsets = { {
-                {1, 0, 0}, {-1, 0, 0}, {0, 1, 0}, {0, -1, 0}, {0, 0, 1}, {0, 0, -1}
-            } };
-            for (size_t i = 0; i < offsets.size(); ++i)
+            for (size_t i = 0; i < adjacent.size(); ++i)
             {
-                adjacent[i].x = x + offsets[i][0];
-                adjacent[i].y = y + offsets[i][1];
-                adjacent[i].z = z + offsets[i][2];
+                adjacent[i].x = x + Vec3<T>::adjacent_cardinal_offsets[i][0];
+                adjacent[i].y = y + Vec3<T>::adjacent_cardinal_offsets[i][1];
+                adjacent[i].z = z + Vec3<T>::adjacent_cardinal_offsets[i][2];
             }
+
             return adjacent;
         }
 
         // Returns all 26 Vec3s around this Vec3
-        std::array<Vec3<T>, 26> adjacent() const
+        constexpr std::array<Vec3<T>, 26> adjacent() const
         {
             std::array<Vec3<T>, 26> adjacent = {};
-            static constexpr std::array<std::array<T, 3>, 26> offsets = { {
-                {1, 0, 0}, {-1, 0, 0}, {0, 0, 1}, {0, 0, -1}, {1, 0, 1}, {1, 0, -1}, {-1, 0, 1}, {-1, 0, -1},
-                {1, 1, 0}, {-1, 1, 0}, {0, 1, 1}, {0, 1, -1}, {1, 1, 1}, {1, 1, -1}, {-1, 1, 1}, {-1, 1, -1}, {0, 1, 0},
-                {1, -1, 0}, {-1, -1, 0}, {0, -1, 1}, {0, -1, -1}, {1, -1, 1}, {1, -1, -1}, {-1, -1, 1}, {-1, -1, -1}, {0, -1, 0}
-            } };
-            for (size_t i = 0; i < offsets.size(); ++i)
+            for (size_t i = 0; i < adjacent.size(); ++i)
             {
-                adjacent[i].x = x + offsets[i][0];
-                adjacent[i].y = y + offsets[i][1];
-                adjacent[i].z = z + offsets[i][2];
+                adjacent[i].x = x + Vec3<T>::adjacent_offsets[i][0];
+                adjacent[i].y = y + Vec3<T>::adjacent_offsets[i][1];
+                adjacent[i].z = z + Vec3<T>::adjacent_offsets[i][2];
             }
+
             return adjacent;
         }
 
-        std::string to_string() const
-        {
-            return fmt::format("({}, {}, {})", x, y, z);
-        }
-
-        std::array<T, 3> to_array() const
+        // Returns the Vec3 as a 3 element array
+        constexpr std::array<T, 3> to_array() const
         {
             return { x, y, z };
         }
 
-        auto operator<=>(const Vec3<T>& other) const = default;
+        constexpr auto operator<=>(const Vec3<T>& rhs) const = default;
 
-        Vec3<T>& operator+=(const Vec3<T>& other)
+        constexpr Vec3<T>& operator+=(const Vec3<T>& rhs)
         {
-            x += other.x;
-            y += other.y;
-            z += other.z;
+            x += rhs.x;
+            y += rhs.y;
+            z += rhs.z;
             return *this;
         }
 
-        Vec3<T>& operator-=(const Vec3<T>& other)
+        constexpr Vec3<T>& operator-=(const Vec3<T>& rhs)
         {
-            x -= other.x;
-            y -= other.y;
-            z -= other.z;
+            x -= rhs.x;
+            y -= rhs.y;
+            z -= rhs.z;
             return *this;
         }
 
-        Vec3<T>& operator*=(const Vec3<T>& other)
+        constexpr Vec3<T>& operator*=(const Vec3<T>& rhs)
         {
-            x *= other.x;
-            y *= other.y;
-            z *= other.z;
+            x *= rhs.x;
+            y *= rhs.y;
+            z *= rhs.z;
             return *this;
         }
 
-        Vec3<T>& operator/=(const Vec3<T>& other)
+        constexpr Vec3<T>& operator/=(const Vec3<T>& rhs)
         {
-            x /= other.x;
-            y /= other.y;
-            z /= other.z;
+            x /= rhs.x;
+            y /= rhs.y;
+            z /= rhs.z;
             return *this;
         }
 
-        Vec3<T>& operator+=(const T other)
+        constexpr Vec3<T>& operator+=(const T rhs)
         {
-            x += other;
-            y += other;
-            z += other;
+            x += rhs;
+            y += rhs;
+            z += rhs;
             return *this;
         }
 
-        Vec3<T>& operator-=(const T other)
+        constexpr Vec3<T>& operator-=(const T rhs)
         {
-            x -= other;
-            y -= other;
-            z -= other;
+            x -= rhs;
+            y -= rhs;
+            z -= rhs;
             return *this;
         }
 
-        Vec3<T>& operator*=(const T other)
+        constexpr Vec3<T>& operator*=(const T rhs)
         {
-            x *= other;
-            y *= other;
-            z *= other;
+            x *= rhs;
+            y *= rhs;
+            z *= rhs;
             return *this;
         }
 
-        Vec3<T>& operator/=(const T other)
+        constexpr Vec3<T>& operator/=(const T rhs)
         {
-            x /= other;
-            y /= other;
-            z /= other;
+            x /= rhs;
+            y /= rhs;
+            z /= rhs;
             return *this;
+        }
+
+        constexpr Vec3<T> operator+(const Vec3<T>& rhs) const
+        {
+            return Vec3<T>(*this) += rhs;
+        }
+
+        constexpr Vec3<T> operator-(const Vec3<T>& rhs) const
+        {
+            return Vec3<T>(*this) -= rhs;
+        }
+
+        constexpr Vec3<T> operator*(const Vec3<T>& rhs) const
+        {
+            return Vec3<T>(*this) *= rhs;
+        }
+
+        constexpr Vec3<T> operator/(const Vec3<T>& rhs) const
+        {
+            return Vec3<T>(*this) /= rhs;
+        }
+
+        constexpr Vec3<T> operator+(const T rhs) const
+        {
+            return Vec3<T>(*this) += rhs;
+        }
+
+        constexpr Vec3<T> operator-(const T rhs) const
+        {
+            return Vec3<T>(*this) -= rhs;
+        }
+
+        constexpr Vec3<T> operator*(const T rhs) const
+        {
+            return Vec3<T>(*this) *= rhs;
+        }
+
+        constexpr Vec3<T> operator/(const T rhs) const
+        {
+            return Vec3<T>(*this) /= rhs;
         }
 
         T x = 0;
         T y = 0;
         T z = 0;
 
-        static const Vec3<T> origin;
+    private:
+        static constexpr std::array<std::array<T, 3>, 6> adjacent_cardinal_offsets = { {
+            {1, 0, 0}, {-1, 0, 0}, {0, 1, 0}, {0, -1, 0}, {0, 0, 1}, {0, 0, -1}
+        } };
+        static constexpr std::array<std::array<T, 3>, 26> adjacent_offsets = { {
+            {1, 0, 0}, {-1, 0, 0}, {0, 0, 1}, {0, 0, -1}, {1, 0, 1}, {1, 0, -1}, {-1, 0, 1}, {-1, 0, -1},
+            {1, 1, 0}, {-1, 1, 0}, {0, 1, 1}, {0, 1, -1}, {1, 1, 1}, {1, 1, -1}, {-1, 1, 1}, {-1, 1, -1}, {0, 1, 0},
+            {1, -1, 0}, {-1, -1, 0}, {0, -1, 1}, {0, -1, -1}, {1, -1, 1}, {1, -1, -1}, {-1, -1, 1}, {-1, -1, -1}, {0, -1, 0}
+        } };
     };
-
-    template<Number T>
-    const Vec3<T> Vec3<T>::origin = { 0, 0, 0 };
-
-    template<Number T>
-    Vec3<T> operator+(Vec3<T> lhs, const Vec3<T>& rhs)
-    {
-        return lhs += rhs;
-    }
-
-    template<Number T>
-    Vec3<T> operator-(Vec3<T> lhs, const Vec3<T>& rhs)
-    {
-        return lhs -= rhs;
-    }
-
-    template<Number T>
-    Vec3<T> operator*(Vec3<T> lhs, const Vec3<T>& rhs)
-    {
-        return lhs *= rhs;
-    }
-
-    template<Number T>
-    Vec3<T> operator/(Vec3<T> lhs, const Vec3<T>& rhs)
-    {
-        return lhs /= rhs;
-    }
-
-    template<Number T>
-    Vec3<T> operator+(Vec3<T> lhs, const T rhs)
-    {
-        return lhs += rhs;
-    }
-
-    template<Number T>
-    Vec3<T> operator-(Vec3<T> lhs, const T rhs)
-    {
-        return lhs -= rhs;
-    }
-
-    template<Number T>
-    Vec3<T> operator*(Vec3<T> lhs, const T rhs)
-    {
-        return lhs *= rhs;
-    }
-
-    template<Number T>
-    Vec3<T> operator/(Vec3<T> lhs, const T rhs)
-    {
-        return lhs /= rhs;
-    }
 
     template<Number T>
     std::ostream& operator<<(std::ostream& os, const Vec3<T>& vec)
     {
-        return os << vec.to_string();
+        return os << fmt::format("({}, {}, {})", vec.x, vec.y, vec.z);
     }
 
     // --------------------------------------------------------------------------------
@@ -385,15 +371,15 @@ namespace aoc
     // --------------------------------------------------------------------------------
 
     template<Number T>
-    Point make_point(const T x, const T y)
+    constexpr Point make_point(const T x, const T y)
     {
-        return Point(static_cast<double>(x), static_cast<double>(y));
+        return { static_cast<double>(x), static_cast<double>(y) };
     }
 
     template<Number T>
-    Point3D make_point_3d(const T x, const T y, const T z)
+    constexpr Point3D make_point_3d(const T x, const T y, const T z)
     {
-        return Point3D(static_cast<double>(x), static_cast<double>(y), static_cast<double>(z));
+        return { static_cast<double>(x), static_cast<double>(y), static_cast<double>(z) };
     }
 
 } // aoc
