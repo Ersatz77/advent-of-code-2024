@@ -9,3 +9,6 @@ CMakeUserPresets.json
 # Visual Studio files and folders
 .vs/
 CMakeSettings.json
+
+# Puzzle inputs
+input/
