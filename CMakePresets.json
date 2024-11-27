@@ -11,8 +11,7 @@
             "hidden": true,
             "generator": "Ninja",
             "binaryDir": "${sourceDir}/out/build/${presetName}",
-            "installDir": "${sourceDir}/out/install/${presetName}",
-            "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+            "installDir": "${sourceDir}/out/install/${presetName}"
         },
         {
             "name": "windows-base",
