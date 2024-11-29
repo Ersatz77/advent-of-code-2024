@@ -3,24 +3,24 @@
 
 #include <algorithm>
 #include <cmath>
+#include <concepts>
 #include <cstdint>
 #include <stdfloat>
 #include <utility>
 #include <vector>
 
-#include "utility/concepts.h"
 #include "utility/utility.h"
 #include "utility/vec.h"
 
 namespace aoc
 {
-    template<Integer T>
+    template<std::integral T>
     T manhattan_distance(const T x1, const T y1, const T x2, const T y2)
     {
         return std::abs(x2 - x1) + std::abs(y2 - y1);
     }
 
-    template<Integer T>
+    template<std::integral T>
     T manhattan_distance(const T x1, const T y1, const T x2, const T y2, const T z1, const T z2)
     {
         return std::abs(x2 - x1) + std::abs(y2 - y1) + std::abs(z2 - z1);
@@ -97,7 +97,7 @@ namespace aoc
         return std::abs(area) / 2;
     }
 
-    template<Integer T>
+    template<std::integral T>
     T signum(const T v)
     {
         return (0 < v) - (v < 0);
@@ -115,7 +115,7 @@ namespace aoc
         return ((a % b) + b) % b;
     }
 
-    template<Integer T>
+    template<std::integral T>
     T pow(T base, T exp)
     {
         T result = 1;

@@ -4,11 +4,17 @@ project(advent_of_code_2024
     VERSION 1.0.0
 )
 
+#
+set(CMAKE_OBJECT_PATH_MAX 128)
+
 # Check for in-source builds
 include("cmake/ban_in_source_builds.cmake")
 
 # Turn off compiler specific extensions
 set(CMAKE_CXX_EXTENSIONS OFF)
+
+# Export compiler commands
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # ------------------------------------------------------------------------------
 # Create target for specifying the C++ standard and compiler specific options
@@ -52,7 +58,16 @@ file(
 )
 include("${CMAKE_CURRENT_BINARY_DIR}/cmake/CPM.cmake")
 
-CPMAddPackage("gh:fmtlib/fmt#11.0.2")
+CPMAddPackage(
+    NAME fmt
+    GITHUB_REPOSITORY "fmtlib/fmt"
+    GIT_TAG "11.0.2"
+)
+CPMAddPackage(
+    NAME ctre
+    GITHUB_REPOSITORY "hanickadot/compile-time-regular-expressions"
+    GIT_TAG "v3.9.0"
+)
 
 # ------------------------------------------------------------------------------
 # Create executable
@@ -61,7 +76,7 @@ add_executable(aoc_2024_app)
 
 target_sources(aoc_2024_app
     PRIVATE
-        "src/main.cpp" "src/utility/concepts.h" "src/utility/day.h" "src/utility/day.cpp" "src/utility/io.h" "src/utility/io.cpp" "src/utility/string.h" "src/utility/string.cpp" "src/utility/vec.h" "src/utility/math.h" "src/utility/math.cpp" "src/solutions/all.h" "src/solutions/day_1/day_1.h" "src/solutions/day_1/day_1.cpp"
+        "src/main.cpp" "src/utility/day.h" "src/utility/day.cpp" "src/utility/io.h" "src/utility/io.cpp" "src/utility/string.h" "src/utility/string.cpp" "src/utility/vec.h" "src/utility/math.h" "src/utility/math.cpp" "src/solutions.h" "src/solutions/day_1/day_1.h" "src/solutions/day_1/day_1.cpp"
 )
 
 target_include_directories(aoc_2024_app
@@ -74,6 +89,7 @@ target_link_libraries(aoc_2024_app
         project_options
         project_warnings
         fmt::fmt
+        ctre::ctre
 )
 
 # ------------------------------------------------------------------------------

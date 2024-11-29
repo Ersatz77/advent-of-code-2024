@@ -7,7 +7,7 @@
 
 #include "fmt/format.h"
 
-#include "solutions/all.h"
+#include "solutions.h"
 #include "utility/day.h"
 
 int main(int argc, char* argv[])

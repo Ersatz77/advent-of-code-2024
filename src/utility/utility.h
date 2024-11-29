@@ -2,6 +2,7 @@
 #define AOC_UTILITY_UTILITY_H
 
 #include <array>
+#include <concepts>
 #include <cstdint>
 #include <string>
 #include <tuple>
@@ -9,10 +10,30 @@
 #include <utility>
 #include <vector>
 
-#include "utility/concepts.h"
+// Macro for checking if `<cmath>` has constexpr support
+#if __GNUC_MINOR__ >= 4
+#define AOC_SUPPORTS_CONSTEXPR_CMATH
+#endif
 
 namespace aoc
 {
+    // --------------------------------------------------------------------------------
+    // Concepts
+    // --------------------------------------------------------------------------------
+
+    template<typename T>
+    concept Number = std::integral<T> || std::floating_point<T>;
+
+    template<typename T>
+    concept Hashable = requires(T v)
+    {
+        { std::hash<T>()(v) } -> std::convertible_to<size_t>;
+    };
+
+    // --------------------------------------------------------------------------------
+    // Utility functions
+    // --------------------------------------------------------------------------------
+
     template<typename T>
     inline void hash_combine(size_t& seed, const T& v)
     {
@@ -52,6 +73,10 @@ namespace aoc
 
 namespace std
 {
+    // --------------------------------------------------------------------------------
+    // Hash functions
+    // --------------------------------------------------------------------------------
+
     template<aoc::Hashable T, aoc::Hashable U>
     struct hash<pair<T, U>>
     {
