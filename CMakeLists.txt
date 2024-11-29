@@ -4,17 +4,11 @@ project(advent_of_code_2024
     VERSION 1.0.0
 )
 
-#
-set(CMAKE_OBJECT_PATH_MAX 128)
-
 # Check for in-source builds
 include("cmake/ban_in_source_builds.cmake")
 
 # Turn off compiler specific extensions
 set(CMAKE_CXX_EXTENSIONS OFF)
-
-# Export compiler commands
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # ------------------------------------------------------------------------------
 # Create target for specifying the C++ standard and compiler specific options
