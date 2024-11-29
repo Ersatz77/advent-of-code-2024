@@ -10,8 +10,7 @@ namespace aoc
 {
     std::vector<std::string> split(const std::string_view str, const std::string_view delim)
     {
-        return std::views::split(str, delim)
-            | std::ranges::to<std::vector<std::string>>();
+        return std::views::split(str, delim) | std::ranges::to<std::vector<std::string>>();
     }
 
     bool is_lower(const std::string_view str)
