@@ -3,37 +3,28 @@
 #include <algorithm>
 #include <cctype>
 #include <ranges>
-#include <regex>
 #include <string>
 #include <vector>
 
 namespace aoc
 {
-    std::vector<std::string> split(const std::string& str, const char delim)
+    std::vector<std::string> split(const std::string_view str, const std::string_view delim)
     {
-        return std::ranges::split_view(str, delim)
+        return std::views::split(str, delim)
             | std::ranges::to<std::vector<std::string>>();
     }
 
-    std::vector<std::string> regex_split(const std::string& str, const std::string& pattern)
+    bool is_lower(const std::string_view str)
     {
-        std::regex re(pattern);
-        return std::vector<std::string>(
-            std::sregex_token_iterator(str.begin(), str.end(), re, -1),
-            std::sregex_token_iterator());
+        return std::all_of(str.begin(), str.end(), std::islower);
     }
 
-    bool is_lower(const std::string& str)
+    bool is_upper(const std::string_view str)
     {
-        return std::all_of(str.begin(), str.end(), [](const char c) {return std::islower(c); });
+        return std::all_of(str.begin(), str.end(), std::isupper);
     }
 
-    bool is_upper(const std::string& str)
-    {
-        return std::all_of(str.begin(), str.end(), [](const char c) { return std::isupper(c); });
-    }
-
-    bool is_unique(const std::string& str)
+    bool is_unique(const std::string_view str)
     {
         for (size_t i = 0; i < str.length(); ++i)
         {
