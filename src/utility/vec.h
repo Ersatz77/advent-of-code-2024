@@ -2,6 +2,7 @@
 #define AOC_UTILITY_VEC_H
 
 #include <array>
+#include <cmath>
 #include <compare>
 #include <cstdint>
 #include <iostream>
@@ -11,8 +12,14 @@
 
 #include "fmt/format.h"
 
-#include "utility/concepts.h"
 #include "utility/utility.h"
+
+#ifdef AOC_SUPPORTS_CONSTEXPR_CMATH
+#define AOC_VEC_MAYBE_CONSTEXPR constexpr
+#else
+#define AOC_VEC_MAYBE_CONSTEXPR
+#endif
+
 
 namespace aoc
 {
@@ -26,6 +33,9 @@ namespace aoc
     {
     public:
         using value_type = T;
+
+        T x = 0;
+        T y = 0;
 
         // Returns the origin (0, 0)
         static constexpr Vec2<T> origin()
@@ -57,6 +67,33 @@ namespace aoc
             }
 
             return adjacent;
+        }
+
+        // Get the magnitude of this vector
+        AOC_VEC_MAYBE_CONSTEXPR double magnitude() const
+        {
+            return std::sqrt(x * x + y * y);
+        }
+
+        // Normalize this vector
+        AOC_VEC_MAYBE_CONSTEXPR Vec2<T>& normalize()
+        {
+            double m = magnitude();
+            x /= m;
+            y /= m;
+            return *this;
+        }
+
+        // Returns a normalized copy of this vector
+        AOC_VEC_MAYBE_CONSTEXPR Vec2<T> normalized() const
+        {
+            return Vec2<T>(*this).normalize();
+        }
+
+        // Returns the dot product of this vector with another vector
+        constexpr double dot(const Vec2<T>& rhs) const
+        {
+            return x * rhs.x + y * rhs.y;
         }
 
         // Returns the Vec2 as a 2 element array
@@ -163,9 +200,6 @@ namespace aoc
             return Vec2<T>(*this) /= rhs;
         }
 
-        T x = 0;
-        T y = 0;
-
     private:
         static constexpr std::array<std::array<T, 2>, 4> adjacent_cardinal_offsets = { {
             {1, 0}, {-1, 0}, {0, 1}, {0, -1}
@@ -191,6 +225,10 @@ namespace aoc
     {
     public:
         using value_type = T;
+
+        T x = 0;
+        T y = 0;
+        T z = 0;
 
         // Returns the origin (0, 0, 0)
         static constexpr Vec2<T> origin()
@@ -224,6 +262,44 @@ namespace aoc
             }
 
             return adjacent;
+        }
+
+        // Get the magnitude of this vector
+        AOC_VEC_MAYBE_CONSTEXPR double magnitude() const
+        {
+            return std::sqrt(x * x + y * y + z * z);
+        }
+
+        // Normalize this vector
+        AOC_VEC_MAYBE_CONSTEXPR Vec3<T>& normalize()
+        {
+            double m = magnitude();
+            x /= m;
+            y /= m;
+            z /= m;
+            return *this;
+        }
+
+        // Returns a normalized copy of this vector
+        AOC_VEC_MAYBE_CONSTEXPR Vec3<T> normalized() const
+        {
+            return Vec3<T>(*this).normalize();
+        }
+
+        // Returns the dot product of this vector with another vector
+        constexpr double dot(const Vec3<T>& rhs) const
+        {
+            return x * rhs.x + y * rhs.y + z * rhs.z;
+        }
+
+        // Returns the dot product of this vector with another vector
+        constexpr Vec3<T> cross(const Vec3<T> rhs) const
+        {
+            return Vec3<T>(
+                y * rhs.z - z * rhs.y,
+                z * rhs.x - x * rhs.z,
+                x * rhs.y - y * rhs.x
+            );
         }
 
         // Returns the Vec3 as a 3 element array
@@ -337,10 +413,6 @@ namespace aoc
         {
             return Vec3<T>(*this) /= rhs;
         }
-
-        T x = 0;
-        T y = 0;
-        T z = 0;
 
     private:
         static constexpr std::array<std::array<T, 3>, 6> adjacent_cardinal_offsets = { {
