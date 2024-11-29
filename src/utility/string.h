@@ -1,28 +1,23 @@
 #ifndef AOC_UTILITY_STRING_H
 #define AOC_UTILITY_STRING_H
 
+#include <ranges>
 #include <string>
 #include <vector>
 
+#include "ctll.hpp"
 #include "ctre.hpp"
 
 namespace aoc
 {
-    // Split a string using a single delimiter
-    std::vector<std::string> split(const std::string_view str, const std::string_view delim = " ");
+    // Split a string using a delimiter
+    std::vector<std::string> split(const std::string_view str, const std::string_view delim);
 
-    // Split a string using regex
-    template<ctll::fixed_string Pattern = " ">
+    // Split a string using a regex delimiter
+    template<ctll::fixed_string Pattern>
     std::vector<std::string> regex_split(const std::string_view str)
     {
-        auto split_results = ctre::split<Pattern>(str);
-        std::vector<std::string> results;
-        for (const auto& s : split_results)
-        {
-            results.emplace_back(s);
-        }
-
-        return results;
+        return ctre::split<Pattern>(str) | std::ranges::to<std::vector<std::string>>();
     }
 
     // Returns true if the whole string is lowercase
