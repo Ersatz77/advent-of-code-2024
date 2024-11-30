@@ -21,21 +21,21 @@ namespace aoc
     }
 
     template<std::integral T>
-    T manhattan_distance(const T x1, const T y1, const T x2, const T y2, const T z1, const T z2)
+    T manhattan_distance(const T x1, const T y1, const T z1, const T x2, const T y2, const T z2)
     {
         return std::abs(x2 - x1) + std::abs(y2 - y1) + std::abs(z2 - z1);
     }
 
     template<Number T>
-    T manhattan_distance(const Vec2<T>& vec1, const Vec2<T>& vec2)
+    T manhattan_distance(const Vec2<T>& v1, const Vec2<T>& v2)
     {
-        return std::abs(vec2.x - vec1.x) + std::abs(vec2.y - vec1.y);
+        return manhattan_distance(v1.x, v1.y, v2.x, v2.y);
     }
 
     template<Number T>
-    T manhattan_distance(const Vec3<T>& vec1, const Vec3<T>& vec2)
+    T manhattan_distance(const Vec3<T>& v1, const Vec3<T>& v2)
     {
-        return std::abs(vec2.x - vec1.x) + std::abs(vec2.y - vec1.y) + std::abs(vec2.z - vec1.z);
+        return manhattan_distance(v1.x, v1.y, v1.z, v2.x, v2.y, v2.z);
     }
 
     template<Number T>
@@ -51,12 +51,6 @@ namespace aoc
         }
 
         return res;
-    }
-
-    template<Number T>
-    std::vector<Vec2<T>> cartesian_product(const Vec2<T>& vec1, const Vec2<T>& vec2)
-    {
-        return cartesian_product(vec1.x, vec1.y, vec2.x, vec2.y);
     }
 
     template<Number T>
@@ -78,9 +72,15 @@ namespace aoc
     }
 
     template<Number T>
-    std::vector<Vec3<T>> cartesian_product(const Vec3<T>& vec1, const Vec3<T>& vec2)
+    std::vector<Vec2<T>> cartesian_product(const Vec2<T>& v1, const Vec2<T>& v2)
     {
-        return cartesian_product(vec1.x, vec1.y, vec1.z, vec2.x, vec2.y, vec2.z);
+        return cartesian_product(v1.x, v1.y, v2.x, v2.y);
+    }
+
+    template<Number T>
+    std::vector<Vec3<T>> cartesian_product(const Vec3<T>& v1, const Vec3<T>& v2)
+    {
+        return cartesian_product(v1.x, v1.y, v1.z, v2.x, v2.y, v2.z);
     }
 
     template<Number T>
