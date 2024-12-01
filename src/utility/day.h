@@ -21,13 +21,16 @@ namespace aoc
     class Day
     {
     public:
-        Day() = default;
+        explicit Day(int day_num);
         virtual ~Day() = default;
 
         virtual std::string part_1(const std::filesystem::path& input_root) const = 0;
         virtual std::string part_2(const std::filesystem::path& input_root) const = 0;
 
         DayResults run(const std::filesystem::path& input_root) const;
+
+    private:
+        int m_day_num;
     };
 
 } // aoc

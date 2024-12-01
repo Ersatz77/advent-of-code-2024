@@ -10,6 +10,9 @@ namespace aoc
 {
     class Day1 : public Day
     {
+    public:
+        Day1() : Day(1) {}
+
         std::string part_1(const std::filesystem::path& input_root) const override;
         std::string part_2(const std::filesystem::path& input_root) const override;
     };

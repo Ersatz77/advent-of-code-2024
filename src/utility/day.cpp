@@ -5,8 +5,15 @@
 #include <filesystem>
 #include <string>
 
+#include "fmt/format.h"
+
 namespace aoc
 {
+    Day::Day(int day_num) :
+        m_day_num(day_num)
+    {
+    }
+
     DayResults Day::run(const std::filesystem::path& input_root) const
     {
         auto part_1_begin = std::chrono::high_resolution_clock::now();
@@ -20,7 +27,10 @@ namespace aoc
         uint64_t part_1_runtime = std::chrono::duration_cast<std::chrono::milliseconds>(part_1_end - part_1_begin).count();
         uint64_t part_2_runtime = std::chrono::duration_cast<std::chrono::milliseconds>(part_2_end - part_2_begin).count();
 
-        return { part_1_output, part_1_runtime, part_2_output, part_2_runtime };
+        std::string formatted_part_1_output = fmt::format("Day {} Part 1 | {}", m_day_num, part_1_output);
+        std::string formatted_part_2_output = fmt::format("Day {} Part 2 | {}", m_day_num, part_2_output);
+
+        return { formatted_part_1_output, part_1_runtime, formatted_part_2_output, part_2_runtime };
     }
 
 } // aoc
