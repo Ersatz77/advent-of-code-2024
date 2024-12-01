@@ -25,6 +25,7 @@ int main(int argc, char* argv[])
     solutions.reserve(25);
 
     solutions.push_back(std::make_unique<aoc::Day1>());
+    solutions.push_back(std::make_unique<aoc::Day2>());
 
     // Run solutions
     try
