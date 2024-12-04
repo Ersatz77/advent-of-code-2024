@@ -3,7 +3,7 @@
 
 #include <array>
 #include <concepts>
-#include <cstdint>
+#include <cstddef>
 #include <string>
 #include <tuple>
 #include <unordered_set>
@@ -27,7 +27,7 @@ namespace aoc
     template<typename T>
     concept Hashable = requires(T v)
     {
-        { std::hash<T>()(v) } -> std::convertible_to<size_t>;
+        { std::hash<T>()(v) } -> std::convertible_to<std::size_t>;
     };
 
     // --------------------------------------------------------------------------------
@@ -35,7 +35,7 @@ namespace aoc
     // --------------------------------------------------------------------------------
 
     template<typename T>
-    inline void hash_combine(size_t& seed, const T& v)
+    inline void hash_combine(std::size_t& seed, const T& v)
     {
         std::hash<T> hasher;
         seed ^= hasher(v) + 0x9E3779B9 + (seed << 6) + (seed >> 2);
@@ -56,7 +56,7 @@ namespace aoc
     }
 
     // Creates an integer number out of an array of digits
-    template<std::integral T, size_t N>
+    template<std::integral T, std::size_t N>
     T array_to_int(const std::array<T, N>& arr)
     {
         T result = 0;
@@ -80,9 +80,9 @@ namespace std
     template<aoc::Hashable T, aoc::Hashable U>
     struct hash<pair<T, U>>
     {
-        size_t operator()(const pair<T, U>& p) const
+        std::size_t operator()(const pair<T, U>& p) const
         {
-            size_t seed = 0;
+            std::size_t seed = 0;
             aoc::hash_combine(seed, p.first);
             aoc::hash_combine(seed, p.second);
             return seed;
@@ -92,9 +92,9 @@ namespace std
     template<aoc::Hashable T>
     struct hash<vector<T>>
     {
-        size_t operator()(const vector<T>& v) const
+        std::size_t operator()(const vector<T>& v) const
         {
-            size_t seed = 0;
+            std::size_t seed = 0;
             for (const T& i : v)
             {
                 aoc::hash_combine(seed, i);
@@ -107,9 +107,9 @@ namespace std
     template<aoc::Hashable T>
     struct hash<unordered_set<T>>
     {
-        size_t operator()(const unordered_set<T>& s) const
+        std::size_t operator()(const unordered_set<T>& s) const
         {
-            size_t seed = 0;
+            std::size_t seed = 0;
             for (const T& v : s)
             {
                 aoc::hash_combine(seed, v);

@@ -4,8 +4,7 @@
 #include <algorithm>
 #include <cmath>
 #include <concepts>
-#include <cstdint>
-#include <stdfloat>
+#include <cstddef>
 #include <utility>
 #include <vector>
 
@@ -87,7 +86,7 @@ namespace aoc
     T polygon_area(const std::vector<Vec2<T>>& polygon)
     {
         T area = 0;
-        for (size_t i = 0; i < polygon.size(); ++i)
+        for (std::size_t i = 0; i < polygon.size(); ++i)
         {
             const Vec2<T>& current = polygon[i];
             const Vec2<T>& next = polygon[(i + 1) % polygon.size()];

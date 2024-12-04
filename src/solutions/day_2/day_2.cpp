@@ -1,6 +1,7 @@
 #include "solutions/day_2/day_2.h"
 
 #include <cmath>
+#include <cstddef>
 #include <filesystem>
 #include <fstream>
 #include <sstream>
@@ -40,7 +41,7 @@ namespace aoc
         }
         
         bool is_increasing = report[0] < report[1];
-        for (size_t i = 0; i < report.size() - 1; ++i)
+        for (std::size_t i = 0; i < report.size() - 1; ++i)
         {
             int diff = std::abs(report[i] - report[i + 1]);
             if (diff < 1 || diff > 3)
@@ -71,10 +72,10 @@ namespace aoc
         }
 
         // Try removing one of the values
-        for (size_t i = 0; i < report.size(); ++i)
+        for (std::size_t i = 0; i < report.size(); ++i)
         {
             std::vector<int> modified_report;
-            for (size_t j = 0; j < report.size(); ++j)
+            for (std::size_t j = 0; j < report.size(); ++j)
             {
                 if (j != i)
                 {

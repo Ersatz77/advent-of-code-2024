@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <cmath>
+#include <cstddef>
 #include <filesystem>
 #include <fstream>
 #include <string>
@@ -40,7 +41,7 @@ namespace aoc
         std::ranges::sort(right_list);
 
         int total_distance = 0;
-        for (size_t i = 0; i < left_list.size(); ++i)
+        for (std::size_t i = 0; i < left_list.size(); ++i)
         {
             total_distance += std::abs(left_list[i] - right_list[i]);
         }

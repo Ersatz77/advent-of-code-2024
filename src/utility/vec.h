@@ -4,7 +4,7 @@
 #include <array>
 #include <cmath>
 #include <compare>
-#include <cstdint>
+#include <cstddef>
 #include <iostream>
 #include <string>
 #include <tuple>
@@ -47,7 +47,7 @@ namespace aoc
         constexpr std::array<Vec2<T>, 4> adjacent_cardinal() const
         {
             std::array<Vec2<T>, 4> adjacent = {};
-            for (size_t i = 0; i < adjacent.size(); ++i)
+            for (std::std::size_t i = 0; i < adjacent.size(); ++i)
             {
                 adjacent[i].x = x + Vec2<T>::adjacent_cardinal_offsets[i][0];
                 adjacent[i].y = y + Vec2<T>::adjacent_cardinal_offsets[i][1];
@@ -60,7 +60,7 @@ namespace aoc
         constexpr std::array<Vec2<T>, 8> adjacent() const
         {
             std::array<Vec2<T>, 8> adjacent = {};
-            for (size_t i = 0; i < adjacent.size(); ++i)
+            for (std::std::size_t i = 0; i < adjacent.size(); ++i)
             {
                 adjacent[i].x = x + Vec2<T>::adjacent_offsets[i][0];
                 adjacent[i].y = y + Vec2<T>::adjacent_offsets[i][1];
@@ -240,7 +240,7 @@ namespace aoc
         constexpr std::array<Vec3<T>, 6> adjacent_cardinal() const
         {
             std::array<Vec3<T>, 6> adjacent = {};
-            for (size_t i = 0; i < adjacent.size(); ++i)
+            for (std::size_t i = 0; i < adjacent.size(); ++i)
             {
                 adjacent[i].x = x + Vec3<T>::adjacent_cardinal_offsets[i][0];
                 adjacent[i].y = y + Vec3<T>::adjacent_cardinal_offsets[i][1];
@@ -254,7 +254,7 @@ namespace aoc
         constexpr std::array<Vec3<T>, 26> adjacent() const
         {
             std::array<Vec3<T>, 26> adjacent = {};
-            for (size_t i = 0; i < adjacent.size(); ++i)
+            for (std::size_t i = 0; i < adjacent.size(); ++i)
             {
                 adjacent[i].x = x + Vec3<T>::adjacent_offsets[i][0];
                 adjacent[i].y = y + Vec3<T>::adjacent_offsets[i][1];
@@ -461,9 +461,9 @@ namespace std
     template<aoc::Number T>
     struct hash<aoc::Vec2<T>>
     {
-        size_t operator()(const aoc::Vec2<T>& vec) const
+        std::size_t operator()(const aoc::Vec2<T>& vec) const
         {
-            size_t seed = 0;
+            std::size_t seed = 0;
             aoc::hash_combine(seed, vec.x);
             aoc::hash_combine(seed, vec.y);
             return seed;
@@ -473,9 +473,9 @@ namespace std
     template<aoc::Number T>
     struct hash<aoc::Vec3<T>>
     {
-        size_t operator()(const aoc::Vec3<T>& vec) const
+        std::size_t operator()(const aoc::Vec3<T>& vec) const
         {
-            size_t seed = 0;
+            std::size_t seed = 0;
             aoc::hash_combine(seed, vec.x);
             aoc::hash_combine(seed, vec.y);
             aoc::hash_combine(seed, vec.z);

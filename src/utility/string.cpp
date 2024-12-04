@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <cctype>
+#include <cstddef>
 #include <ranges>
 #include <string>
 #include <vector>
@@ -25,9 +26,9 @@ namespace aoc
 
     bool is_unique(const std::string_view str)
     {
-        for (size_t i = 0; i < str.length(); ++i)
+        for (std::size_t i = 0; i < str.length(); ++i)
         {
-            for (size_t j = i + 1; j < str.length(); ++j)
+            for (std::size_t j = i + 1; j < str.length(); ++j)
             {
                 if (str[i] == str[j])
                 {
