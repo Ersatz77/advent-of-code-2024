@@ -47,7 +47,7 @@ namespace aoc
         constexpr std::array<Vec2<T>, 4> adjacent_cardinal() const
         {
             std::array<Vec2<T>, 4> adjacent = {};
-            for (std::std::size_t i = 0; i < adjacent.size(); ++i)
+            for (std::size_t i = 0; i < adjacent.size(); ++i)
             {
                 adjacent[i].x = x + Vec2<T>::adjacent_cardinal_offsets[i][0];
                 adjacent[i].y = y + Vec2<T>::adjacent_cardinal_offsets[i][1];
@@ -60,7 +60,7 @@ namespace aoc
         constexpr std::array<Vec2<T>, 8> adjacent() const
         {
             std::array<Vec2<T>, 8> adjacent = {};
-            for (std::std::size_t i = 0; i < adjacent.size(); ++i)
+            for (std::size_t i = 0; i < adjacent.size(); ++i)
             {
                 adjacent[i].x = x + Vec2<T>::adjacent_offsets[i][0];
                 adjacent[i].y = y + Vec2<T>::adjacent_offsets[i][1];
