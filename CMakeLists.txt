@@ -70,7 +70,7 @@ add_executable(aoc_2024_app)
 
 target_sources(aoc_2024_app
     PRIVATE
-        "src/main.cpp" "src/utility/day.h" "src/utility/day.cpp" "src/utility/io.h" "src/utility/io.cpp" "src/utility/string.h" "src/utility/string.cpp" "src/utility/vec.h" "src/utility/math.h" "src/utility/math.cpp" "src/solutions.h" "src/solutions/day_1/day_1.h" "src/solutions/day_1/day_1.cpp" "src/solutions/day_2/day_2.h" "src/solutions/day_2/day_2.cpp" "src/solutions/day_3/day_3.h" "src/solutions/day_3/day_3.cpp" "src/solutions/day_4/day_4.h" "src/solutions/day_4/day_4.cpp")
+        "src/main.cpp" "src/utility/day.h" "src/utility/day.cpp" "src/utility/io.h" "src/utility/io.cpp" "src/utility/string.h" "src/utility/string.cpp" "src/utility/vec.h" "src/utility/math.h" "src/utility/math.cpp" "src/solutions.h" "src/solutions/day_1/day_1.h" "src/solutions/day_1/day_1.cpp" "src/solutions/day_2/day_2.h" "src/solutions/day_2/day_2.cpp" "src/solutions/day_3/day_3.h" "src/solutions/day_3/day_3.cpp" "src/solutions/day_4/day_4.h" "src/solutions/day_4/day_4.cpp" "src/solutions/day_5/day_5.h" "src/solutions/day_5/day_5.cpp")
 
 target_include_directories(aoc_2024_app
     PRIVATE
