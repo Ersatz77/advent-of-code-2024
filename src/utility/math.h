@@ -96,6 +96,21 @@ namespace aoc
         return std::abs(area) / 2;
     }
 
+    template<Number T>
+    bool in_area(const Vec2<T>& start, const Vec2<T>& end, const Vec2<T> p)
+    {
+        return p.x >= start.x && p.x <= end.x
+            && p.y >= start.y && p.y <= end.y;
+    }
+
+    template<Number T>
+    bool in_volume(const Vec3<T>& start, const Vec3<T>& end, const Vec3<T> p)
+    {
+        return p.x >= start.x && p.x <= end.x
+            && p.y >= start.y && p.y <= end.y
+            && p.z >= start.z && p.z <= end.z;
+    }
+
     template<std::integral T>
     T signum(const T v)
     {

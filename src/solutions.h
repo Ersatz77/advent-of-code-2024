@@ -7,5 +7,6 @@
 #include "solutions/day_4/day_4.h"
 #include "solutions/day_5/day_5.h"
 #include "solutions/day_6/day_6.h"
+#include "solutions/day_7/day_7.h"
 
 #endif // !AOC_SOLUTIONS_H
