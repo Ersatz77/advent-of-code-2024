@@ -147,6 +147,20 @@ namespace aoc
         return result;
     }
 
+    // Concatenates two numbers together Ex: 10 + 3 == 103
+    template<std::integral T>
+    T concatentate(const T a, const T b)
+    {
+        T pow = 10;
+        while (pow <= b)
+        {
+            pow *= 10;
+        }
+
+        return a * pow + b;
+    }
+
+
     std::pair<double, double> quadratic(const double a, const double b, const double c);
     std::pair<float, float> quadratic(const float a, const float b, const float c);
 
