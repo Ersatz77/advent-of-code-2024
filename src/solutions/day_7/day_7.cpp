@@ -50,7 +50,7 @@ namespace aoc
         const std::size_t idx = 1,
         const bool part_2 = false)
     {
-        // Check the current value against test value if we've used up every number
+        // Check the current value against the test value if we've used up every number
         if (idx == equation.numbers.size())
         {
             return current == equation.test_value;
