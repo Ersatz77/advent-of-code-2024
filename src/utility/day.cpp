@@ -24,8 +24,8 @@ namespace aoc
         std::string part_2_output = part_2(input_root);
         auto part_2_end = std::chrono::high_resolution_clock::now();
 
-        uint64_t part_1_runtime = std::chrono::duration_cast<std::chrono::milliseconds>(part_1_end - part_1_begin).count();
-        uint64_t part_2_runtime = std::chrono::duration_cast<std::chrono::milliseconds>(part_2_end - part_2_begin).count();
+        std::uint64_t part_1_runtime = std::chrono::duration_cast<std::chrono::milliseconds>(part_1_end - part_1_begin).count();
+        std::uint64_t part_2_runtime = std::chrono::duration_cast<std::chrono::milliseconds>(part_2_end - part_2_begin).count();
 
         std::string formatted_part_1_output = fmt::format("Day {} Part 1 | {}", m_day_num, part_1_output);
         std::string formatted_part_2_output = fmt::format("Day {} Part 2 | {}", m_day_num, part_2_output);

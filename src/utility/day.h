@@ -11,10 +11,10 @@ namespace aoc
     struct DayResults
     {
         std::string part_1_output;
-        uint64_t part_1_runtime;
+        std::uint64_t part_1_runtime;
 
         std::string part_2_output;
-        uint64_t part_2_runtime;
+        std::uint64_t part_2_runtime;
     };
 
     // An abstract class for a day

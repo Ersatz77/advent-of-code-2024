@@ -38,7 +38,7 @@ int main(int argc, char* argv[])
     {
         std::cout << fmt::format("Advent of Code 2024\n{}\n", std::string(80, '-'));
 
-        uint64_t total_runtime = 0;
+        std::uint64_t total_runtime = 0;
         for (const auto& day : solutions)
         {
             const aoc::DayResults results = day->run(input_root);
