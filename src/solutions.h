@@ -9,5 +9,6 @@
 #include "solutions/day_6/day_6.h"
 #include "solutions/day_7/day_7.h"
 #include "solutions/day_8/day_8.h"
+#include "solutions/day_9/day_9.h"
 
 #endif // !AOC_SOLUTIONS_H
