@@ -1,5 +1,6 @@
 #include "solutions/day_9/day_9.h"
 
+#include <cstddef>
 #include <cstdint>
 #include <filesystem>
 #include <fstream>
