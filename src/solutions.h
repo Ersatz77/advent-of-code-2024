@@ -11,5 +11,6 @@
 #include "solutions/day_8/day_8.h"
 #include "solutions/day_9/day_9.h"
 #include "solutions/day_10/day_10.h"
+#include "solutions/day_11/day_11.h"
 
 #endif // !AOC_SOLUTIONS_H
