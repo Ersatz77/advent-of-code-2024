@@ -9,7 +9,6 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <utility>
-#include <vector>
 
 #include "fmt/format.h"
 
@@ -38,11 +37,11 @@ namespace aoc
         return map;
     }
 
-    static std::pair<std::size_t, std::size_t> walk_trails(const std::unordered_map<Point, int>& map, const Point& trailhead)
+    static std::pair<std::size_t, std::uint64_t> walk_trails(const std::unordered_map<Point, int>& map, const Point& trailhead)
     {
         std::queue<Point> to_visit({ trailhead });
         std::unordered_set<Point> unique_trail_ends;
-        std::vector<Point> trail_ends;
+        std::uint64_t trail_ends = 0;
         while (!to_visit.empty())
         {
             const Point current = to_visit.front();
@@ -52,7 +51,7 @@ namespace aoc
             if (map.at(current) == 9)
             {
                 unique_trail_ends.insert(current);
-                trail_ends.push_back(current);
+                ++trail_ends;
                 continue;
             }
 
@@ -75,14 +74,14 @@ namespace aoc
             }
         }
 
-        return { unique_trail_ends.size(), trail_ends.size() };
+        return { unique_trail_ends.size(), trail_ends };
     }
 
     std::string Day10::part_1(const std::filesystem::path& input_root) const
     {
         const auto map = parse_input(input_root / "day_10.txt");
 
-        uint64_t score = 0;
+        std::uint64_t score = 0;
         for (const auto& [pos, height] : map)
         {
             if (height == 0)
@@ -98,7 +97,7 @@ namespace aoc
     {
         const auto map = parse_input(input_root / "day_10.txt");
 
-        uint64_t rating = 0;
+        std::uint64_t rating = 0;
         for (const auto& [pos, height] : map)
         {
             if (height == 0)
