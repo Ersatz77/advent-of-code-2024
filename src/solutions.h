@@ -13,6 +13,6 @@
 #include "solutions/day_10/day_10.h"
 #include "solutions/day_11/day_11.h"
 #include "solutions/day_12/day_12.h"
-
+#include "solutions/day_13/day_13.h"
 
 #endif // !AOC_SOLUTIONS_H
