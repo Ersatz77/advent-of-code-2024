@@ -67,7 +67,7 @@ namespace aoc
         // https://en.wikipedia.org/wiki/Cramer's_rule#Explicit_formulas_for_small_systems
         // 
         // a1 * x + b1 * y = c1
-        // a2 * y + b2 * y = c2
+        // a2 * x + b2 * y = c2
 
         const auto& a = machine.button_a_delta;
         const auto& b = machine.button_b_delta;
