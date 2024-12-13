@@ -76,7 +76,7 @@ namespace aoc
         // Get the determinant of a and b
         std::int64_t det = (a.x * b.y) - (a.y * b.x);
 
-        // Can't use Cramer's rule of `det` is `0`
+        // The determinant of a and b must not be `0`
         if (det == 0)
         {
             return std::nullopt;
@@ -97,6 +97,7 @@ namespace aoc
         y /= det;
 
         // Calculate token cost
+        // a_presses * 3 + b_presses
         return x * 3 + y;
     }
 
