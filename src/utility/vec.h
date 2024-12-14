@@ -132,6 +132,13 @@ namespace aoc
             return *this;
         }
 
+        constexpr Vec2<T>& operator%=(const Vec2<T>& rhs)
+        {
+            x %= rhs.x;
+            y %= rhs.y;
+            return *this;
+        }
+
         constexpr Vec2<T>& operator+=(const T rhs)
         {
             x += rhs;
@@ -160,6 +167,13 @@ namespace aoc
             return *this;
         }
 
+        constexpr Vec2<T>& operator%=(const T rhs)
+        {
+            x %= rhs;
+            y %= rhs;
+            return *this;
+        }
+
         constexpr Vec2<T> operator+(const Vec2<T>& rhs) const
         {
             return Vec2<T>(*this) += rhs;
@@ -180,6 +194,11 @@ namespace aoc
             return Vec2<T>(*this) /= rhs;
         }
 
+        constexpr Vec2<T> operator%(const Vec2<T>& rhs) const
+        {
+            return Vec2<T>(*this) %= rhs;
+        }
+
         constexpr Vec2<T> operator+(const T rhs) const
         {
             return Vec2<T>(*this) += rhs;
@@ -198,6 +217,11 @@ namespace aoc
         constexpr Vec2<T> operator/(const T rhs) const
         {
             return Vec2<T>(*this) /= rhs;
+        }
+
+        constexpr Vec2<T> operator%(const T rhs) const
+        {
+            return Vec2<T>(*this) %= rhs;
         }
 
     private:
@@ -342,6 +366,14 @@ namespace aoc
             return *this;
         }
 
+        constexpr Vec3<T>& operator%=(const Vec3<T>& rhs)
+        {
+            x %= rhs.x;
+            y %= rhs.y;
+            z %= rhs.z;
+            return *this;
+        }
+
         constexpr Vec3<T>& operator+=(const T rhs)
         {
             x += rhs;
@@ -374,6 +406,14 @@ namespace aoc
             return *this;
         }
 
+        constexpr Vec3<T>& operator%=(const T rhs)
+        {
+            x %= rhs;
+            y %= rhs;
+            z %= rhs;
+            return *this;
+        }
+
         constexpr Vec3<T> operator+(const Vec3<T>& rhs) const
         {
             return Vec3<T>(*this) += rhs;
@@ -394,6 +434,11 @@ namespace aoc
             return Vec3<T>(*this) /= rhs;
         }
 
+        constexpr Vec3<T> operator%(const Vec3<T>& rhs) const
+        {
+            return Vec3<T>(*this) %= rhs;
+        }
+
         constexpr Vec3<T> operator+(const T rhs) const
         {
             return Vec3<T>(*this) += rhs;
@@ -412,6 +457,11 @@ namespace aoc
         constexpr Vec3<T> operator/(const T rhs) const
         {
             return Vec3<T>(*this) /= rhs;
+        }
+
+        constexpr Vec3<T> operator%(const T rhs) const
+        {
+            return Vec3<T>(*this) %= rhs;
         }
 
     private:
