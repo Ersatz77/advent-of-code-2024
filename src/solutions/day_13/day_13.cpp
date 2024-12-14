@@ -48,12 +48,12 @@ namespace aoc
             constexpr ctll::fixed_string prize_pattern = R"(Prize: X=(?<x>\d+), Y=(?<y>\d+))";
 
             auto button_a_match = ctre::match<button_pattern>(raw_button_a);
-            auto button_b_match = ctre::match< button_pattern>(raw_button_b);
+            auto button_b_match = ctre::match<button_pattern>(raw_button_b);
             auto prize_location_match = ctre::match<prize_pattern>(raw_prize_location);
 
-            Vec2<std::int64_t> button_a{ button_a_match.get<"x">().to_number(), button_a_match.get<"y">().to_number() };
-            Vec2<std::int64_t> button_b{ button_b_match.get<"x">().to_number(), button_b_match.get<"y">().to_number() };
-            Vec2<std::int64_t> prize_location{ prize_location_match.get<"x">().to_number(), prize_location_match.get<"y">().to_number() };
+            Vec2<std::int64_t> button_a = { button_a_match.get<"x">().to_number(), button_a_match.get<"y">().to_number() };
+            Vec2<std::int64_t> button_b = { button_b_match.get<"x">().to_number(), button_b_match.get<"y">().to_number() };
+            Vec2<std::int64_t> prize_location = { prize_location_match.get<"x">().to_number(), prize_location_match.get<"y">().to_number() };
 
             claw_machines.emplace_back(button_a, button_b, prize_location);
         }
