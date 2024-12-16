@@ -492,6 +492,18 @@ namespace aoc
     // Utility functions
     // --------------------------------------------------------------------------------
 
+    template<Number T, Number U>
+    constexpr Vec2<T> make_vec2(const U x, const U y)
+    {
+        return { static_cast<T>(x), static_cast<T>(y) };
+    }
+
+    template<Number T, Number U>
+    constexpr Vec2<T> make_vec3(const U x, const U y, const U z)
+    {
+        return { static_cast<T>(x), static_cast<T>(y), static_cast<T>(z) };
+    }
+
     template<Number T>
     constexpr Point make_point(const T x, const T y)
     {
