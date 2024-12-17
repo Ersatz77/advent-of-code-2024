@@ -141,7 +141,7 @@ namespace aoc
             a += 7 * static_cast<std::int64_t>(pow(8ULL, i));
         }
 
-        // Run the program until we the program is self-replicated
+        // Run the program until the program is self-replicated
         while (true)
         {
             const auto output = run_program(program, a, b, c);
