@@ -499,7 +499,7 @@ namespace aoc
     }
 
     template<Number T, Number U>
-    constexpr Vec2<T> make_vec3(const U x, const U y, const U z)
+    constexpr Vec3<T> make_vec3(const U x, const U y, const U z)
     {
         return { static_cast<T>(x), static_cast<T>(y), static_cast<T>(z) };
     }

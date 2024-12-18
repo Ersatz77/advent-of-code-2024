@@ -46,7 +46,7 @@ namespace aoc
         std::vector<std::int64_t> program;
         for (const auto& s : split(raw_program, ","))
         {
-            program.push_back(std::stoi(s));
+            program.push_back(std::stoll(s));
         }
 
         return { program, reg_a, reg_b, reg_c };
