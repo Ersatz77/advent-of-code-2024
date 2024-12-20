@@ -1,5 +1,6 @@
 #include "solutions/day_20/day_20.h"
 
+#include <algorithm>
 #include <cstddef>
 #include <filesystem>
 #include <queue>
@@ -128,6 +129,8 @@ namespace aoc
             | std::views::transform([](const auto& p) { return p; })
             | std::ranges::to<std::vector<std::pair<Point, int>>>();
 
+        // Sort the vector by distance so we iterate over it correctly
+        std::ranges::sort(visited, [](const auto& left, const auto& right) { return left.second < right.second; });
 
         // Walk all visited positions and calculate the time saved by taking a shortcut
         constexpr int max_cheat_distance = 20;
