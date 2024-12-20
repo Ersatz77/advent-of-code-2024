@@ -69,7 +69,7 @@ namespace aoc
 
             visited[current] = distance;
 
-            // Skip postion if we reached the end
+            // Skip position if we reached the end
             if (current == end)
             {
                 continue;
