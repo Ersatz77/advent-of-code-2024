@@ -52,7 +52,7 @@ namespace aoc
 
     static std::unordered_map<Point, int> walk_maze(const std::unordered_set<Point>& walls, const Point& start, const Point& end)
     {
-        // BFS to find the distances from each position
+        // BFS to find the distance for each position
         std::queue<std::pair<Point, int>> to_visit({ {start, 0} });
         std::unordered_map<Point, int> visited;
 
