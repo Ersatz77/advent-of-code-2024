@@ -13,13 +13,13 @@
 
 namespace aoc
 {
-    template<std::integral T>
+    template<Number T>
     T manhattan_distance(const T x1, const T y1, const T x2, const T y2)
     {
         return std::abs(x2 - x1) + std::abs(y2 - y1);
     }
 
-    template<std::integral T>
+    template<Number T>
     T manhattan_distance(const T x1, const T y1, const T z1, const T x2, const T y2, const T z2)
     {
         return std::abs(x2 - x1) + std::abs(y2 - y1) + std::abs(z2 - z1);

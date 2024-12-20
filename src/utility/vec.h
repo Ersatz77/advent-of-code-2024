@@ -3,6 +3,7 @@
 
 #include <array>
 #include <cmath>
+#include <cstddef>
 #include <compare>
 #include <cstddef>
 #include <iostream>
@@ -67,6 +68,30 @@ namespace aoc
             }
 
             return adjacent;
+        }
+
+        static constexpr std::array<Vec2<T>, 4> adjacent_cardinal_deltas()
+        {
+            std::array<Vec2<T>, 4> deltas;
+            for (std::size_t i = 0; i < deltas.size(); ++i)
+            {
+                deltas[i].x = Vec2<T>::adjacent_cardinal_offsets[i][0];
+                deltas[i].y = Vec2<T>::adjacent_cardinal_offsets[i][1];
+            }
+
+            return deltas;
+        }
+
+        static constexpr std::array<Vec2<T>, 8> adjacent_deltas()
+        {
+            std::array<Vec2<T>, 8> deltas;
+            for (std::size_t i = 0; i < deltas.size(); ++i)
+            {
+                deltas[i].x = Vec2<T>::adjacent_offsets[i][0];
+                deltas[i].y = Vec2<T>::adjacent_offsets[i][1];
+            }
+
+            return deltas;
         }
 
         // Get the magnitude of this vector
@@ -286,6 +311,32 @@ namespace aoc
             }
 
             return adjacent;
+        }
+
+        static constexpr std::array<Vec3<T>, 6> adjacent_cardinal_deltas()
+        {
+            std::array<Vec3<T>, 6> deltas;
+            for (std::size_t i = 0; i < deltas.size(); ++i)
+            {
+                deltas[i].x = Vec3<T>::adjacent_cardinal_offsets[i][0];
+                deltas[i].y = Vec3<T>::adjacent_cardinal_offsets[i][1];
+                deltas[i].z = Vec3<T>::adjacent_cardinal_offsets[i][2];
+            }
+
+            return deltas;
+        }
+
+        static constexpr std::array<Vec3<T>, 26> adjacent_deltas()
+        {
+            std::array<Vec3<T>, 26> deltas;
+            for (std::size_t i = 0; i < deltas.size(); ++i)
+            {
+                deltas[i].x = Vec3<T>::adjacent_offsets[i][0];
+                deltas[i].y = Vec3<T>::adjacent_offsets[i][1];
+                deltas[i].z = Vec3<T>::adjacent_offsets[i][2];
+            }
+
+            return deltas;
         }
 
         // Get the magnitude of this vector
