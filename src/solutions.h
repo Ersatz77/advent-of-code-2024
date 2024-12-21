@@ -22,5 +22,6 @@
 #include "solutions/day_19/day_19.h"
 #include "solutions/day_20/day_20.h"
 #include "solutions/day_21/day_21.h"
+#include "solutions/day_22/day_22.h"
 
 #endif // !AOC_SOLUTIONS_H

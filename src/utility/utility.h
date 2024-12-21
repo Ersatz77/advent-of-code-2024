@@ -4,6 +4,7 @@
 #include <array>
 #include <concepts>
 #include <cstddef>
+#include <cstdint>
 #include <string>
 #include <tuple>
 #include <unordered_set>
@@ -115,6 +116,19 @@ namespace std
                 aoc::hash_combine(seed, v);
             }
 
+            return seed;
+        }
+    };
+
+    template<>
+    struct hash<tuple<string, uint64_t, uint64_t>>
+    {
+        std::size_t operator()(const tuple<string, uint64_t, uint64_t>& t) const
+        {
+            std::size_t seed = 0;
+            aoc::hash_combine(seed, get<0>(t));
+            aoc::hash_combine(seed, get<1>(t));
+            aoc::hash_combine(seed, get<2>(t));
             return seed;
         }
     };
