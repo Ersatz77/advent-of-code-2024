@@ -105,6 +105,21 @@ namespace std
         }
     };
 
+    template<aoc::Hashable T, size_t N>
+    struct hash<array<T, N>>
+    {
+        std::size_t operator()(const array<T, N>& v) const
+        {
+            std::size_t seed = 0;
+            for (const T& i : v)
+            {
+                aoc::hash_combine(seed, i);
+            }
+
+            return seed;
+        }
+    };
+
     template<aoc::Hashable T>
     struct hash<unordered_set<T>>
     {
