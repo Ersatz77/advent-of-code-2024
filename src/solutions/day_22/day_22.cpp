@@ -20,9 +20,6 @@
 
 namespace aoc
 {
-    using MarketSequence = std::array<std::int64_t, 4>;
-    using MarketSequenceMap = std::unordered_map<MarketSequence, int64_t>;
-
     static std::vector<std::int64_t> parse_input(const std::filesystem::path& path)
     {
         std::ifstream file = open_file(path);
