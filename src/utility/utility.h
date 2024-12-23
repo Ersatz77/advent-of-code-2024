@@ -70,6 +70,22 @@ namespace aoc
         return result;
     }
 
+    // Get the intersection of two `std::unordered_set`s
+    template<Hashable T>
+    std::unordered_set<T> set_intersection(const std::unordered_set<T>& a, const std::unordered_set<T>& b)
+    {
+        std::unordered_set<T> result;
+        for (const T& v : a)
+        {
+            if (b.contains(v))
+            {
+                result.insert(v);
+            }
+        }
+
+        return result;
+    }
+
 } // aoc
 
 namespace std
