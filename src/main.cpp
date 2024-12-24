@@ -48,6 +48,7 @@ int main(int argc, char* argv[])
     // solutions.push_back(std::make_unique<aoc::Day22>());
     // solutions.push_back(std::make_unique<aoc::Day23>());
     solutions.push_back(std::make_unique<aoc::Day24>());
+    solutions.push_back(std::make_unique<aoc::Day25>());
 
     // Run solutions
     try
